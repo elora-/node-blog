@@ -1,15 +1,17 @@
-extends layout
+extends layout    
 
 block content
-  h1 New Post
+  h1 #{title}
   form(method="post")
     div
       label Title
-      input(type="text", name="title")
+      input(type="text", name="title", value='#{name}')
     div
       label Content
-      textarea(name="content")
+      textarea(id="content", name="content")
     div
       input(type="submit")
+  script.
+    document.getElementById("content").value = '#{content}'
       
       

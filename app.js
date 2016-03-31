@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
@@ -26,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/post?', post);
+app.use('/post', post);
 app.use('/new-post', newPost);
 
 mongoose.connect('mongodb://localhost/blogdb');

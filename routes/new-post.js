@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET post */
 router.get('/', function(req, res, next) {
-  res.render('new-post');
+  res.render('new-post', { title: "New Post", name: '' });
 });
 
 router.post('/', function(req, res, next) {
@@ -18,7 +18,7 @@ router.post('/', function(req, res, next) {
     if(err) throw err;
   });
 
-  res.redirect('./');
+  res.redirect('/');
 })
 
 module.exports = router;

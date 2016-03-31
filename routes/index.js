@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   Post.find({}, function(err, posts) {
     var text = "";
     posts.forEach(function(k, v){
-      text += '<li><a href="/post?id=' + k._id + '">' + k.name + '</a></li>';
+      text += '<li><a href="/post/' + k._id + '">' + k.name + '</a></li>';
     });
     res.render('index', { content: text });
   });
