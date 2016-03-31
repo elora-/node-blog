@@ -28,7 +28,7 @@ router.get('/:id/:action', function(req, res, next) {
         res.redirect('/');
       });
     } else if(action=='update') {
-      res.render('new-post', { name: post.name, content: post.content, id: post._id, title: "Update Post" });
+      res.render('form', { name: post.name, content: post.content, id: post._id, title: "Update Post" });
     }
   });
 });

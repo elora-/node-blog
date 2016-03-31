@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.header {
+  padding-bottom: 10px;
+}
+
+.post {
+  padding: 10px 0px;
+}

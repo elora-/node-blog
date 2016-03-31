@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET post */
 router.get('/', function(req, res, next) {
-  res.render('new-post', { title: "New Post", name: '' });
+  res.render('form', { title: "New Post", name: '' });
 });
 
 router.post('/', function(req, res, next) {
