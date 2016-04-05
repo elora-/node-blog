@@ -26,9 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/post', post);
-app.use('/new-post', newPost);
+app.use('/new', newPost);
 
-mongoose.connect('mongodb://localhost/blogdb');
+mongoose.connect('mongodb://localhost/blog');
 
 var Post = require('./models/post');
 

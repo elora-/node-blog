@@ -14,3 +14,7 @@ a {
 .post {
   padding: 10px 0px;
 }
+
+#content {
+  resize: none;
+}

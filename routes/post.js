@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var Post = require('./../models/post');
 
 /* GET post */
 router.get('/:id', function(req, res, next) {
-  var Post = require('./../models/post');
   var id = req.params.id;
   console.log(id);
   Post.findById(id, function(err, post) {
@@ -15,7 +15,6 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.get('/:id/:action', function(req, res, next) {
-  var Post = require('./../models/post');
   var id = req.params.id;
   var action = req.params.action;
   Post.findById(id, function(err, post) {
@@ -34,7 +33,6 @@ router.get('/:id/:action', function(req, res, next) {
 });
 
 router.post('/:id/:action', function(req, res, next) {
-  var Post = require('./../models/post');
   var id = req.params.id;
   var action = req.params.action;
 
