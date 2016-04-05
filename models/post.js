@@ -11,6 +11,7 @@ var Schema = mongoose.Schema;
 var postSchema = new Schema({
   name: String,
   content: String,
+  tags: Array,
   created_at: Date,
   updated_at: Date
 });

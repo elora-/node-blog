@@ -10,7 +10,7 @@ router.get('/:id', function(req, res, next) {
   Post.findById(id, function(err, post) {
     if (err) throw err;
 
-    res.render('post', { name: post.name, content: post.content, created_at: post.created_at, updated_at: post.updated_at, id: post._id });
+    res.render('post', { name: post.name, content: post.content, tags: post.tags.join(', '), created_at: post.created_at, updated_at: post.updated_at, id: post._id });
   });
 });
 
@@ -27,7 +27,7 @@ router.get('/:id/:action', function(req, res, next) {
         res.redirect('/');
       });
     } else if(action=='update') {
-      res.render('form', { name: post.name, content: post.content, id: post._id, title: "Update Post" });
+      res.render('form', { name: post.name, content: post.content, id: post._id, title: "Update Post", tags: post.tags.join(', ') });
     }
   });
 });
@@ -42,6 +42,7 @@ router.post('/:id/:action', function(req, res, next) {
     if(action=='update') {
       post.name = req.body.title;
       post.content = req.body.content;
+      post.tags = req.body.tags.replace(/\s/g, '').split(",");
 
       post.save(function(err) {
         if (err) throw err;

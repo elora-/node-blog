@@ -8,17 +8,24 @@ block content
         form(method="post")
           div(class='form-group')
             label(for='title') Title
-            input(type="text", name="title", value='#{name}', class='form-control')
+            input(type="text", id='title', name="title", value='#{name}', class='form-control')
+          div(class='form-group')
+            label(for='tags') Tags
+            input(type='text', id='tags', name='tags', value='#{tags}', class='form-control')
           div(class='form-group')
             label(for='content') Content
             textarea(id="content", name="content", class='form-control', rows='20')
           button(type='submit', class='btn btn-primary') Submit
       div(class='col-md-3 sidebar')
         a(class='btn btn-default btn-lg btn-block', href='/', role='button') Home
-        unless title == 'New Post'
+        if title == 'New Post'
+          a(class='btn btn-primary btn-lg btn-block', href='/new', role='button') #{title}
+          a(class='btn btn-default btn-lg btn-block', href='/tags', role='button') Tags
+        if title == 'Update Post'
           a(class='btn btn-default btn-lg btn-block', href='/new', role='button') New Post
+          a(class='btn btn-default btn-lg btn-block', href='/tags', role='button') Tags
           hr
-        a(class='btn btn-primary btn-lg btn-block', href='#', role='button') #{title}
+          a(class='btn btn-primary btn-lg btn-block', href='#', role='button') #{title}
     script.
       document.getElementById("content").value = '#{content}'
       
