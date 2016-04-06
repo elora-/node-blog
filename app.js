@@ -6,15 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
-require("jsdom").env("", function(err, window) {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  var $ = require("jquery")(window);
-});
-
 var routes = require('./controllers/index');
 var post = require('./controllers/post');
 var newPost = require('./controllers/new-post');
@@ -39,7 +30,7 @@ app.use('/post', post);
 app.use('/new', newPost);
 app.use('/tags', tags);
 
-mongoose.connect('mongodb://localhost/blog');
+mongoose.connect('mongodb://localhost/blogdb');
 
 var Post = require('./models/post');
 

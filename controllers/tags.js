@@ -4,18 +4,25 @@ var Post = require('./../models/post');
 
 /* GET post */
 router.get('/', function(req, res, next) {
-    Post.find({}, function(err, posts) {
-        var uniqueTags = [];
-        posts.forEach(function(k, v){
-            k.tags.forEach(function(tag) {
-                if(!$.inArray(tag, uniqueTags)) {
-                    uniqueTags.push(tag);
-                }
-            });
-        });
-    });
+    var allTags = [];
+    var uniqueTags = [];
+    var number = 0;
 
-    res.render('tags', {  });
+    Post.find({}, function(err, posts) {
+        posts.forEach(function(k, v){
+          k.tags.forEach(function(tag) {
+            allTags.push(tag);
+          });
+        });
+
+        allTags.forEach(function(tag) {
+          if(uniqueTags.indexOf(tag) == -1) {
+            uniqueTags.push(tag);
+          }
+        });
+
+        res.render('tags', { content: uniqueTags, title: 'Tags' });
+    });
 });
 
 module.exports = router;
