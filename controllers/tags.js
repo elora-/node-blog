@@ -21,7 +21,13 @@ router.get('/', function(req, res, next) {
           }
         });
 
-        res.render('tags', { content: uniqueTags, title: 'Tags' });
+        function compare(a, b) {
+            if(typeof a == 'number' && typeof b == 'number') {
+                return a - b;
+            }
+        }
+
+        res.render('tags', { content: '<li>' + uniqueTags.sort(compare).join('</li><li>') + '</li>', title: 'Tags' });
     });
 });
 
