@@ -32,13 +32,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/tagged', function(req, res, next) {
+    var searchTags = req.query.search.replace(/\s/g, '').split(",");
     var text = '';
-    Post.find({ tags: { $in: [ req.query.search ] } }, function(err, posts) {
-        posts.forEach(function(k, v) {
-            text += '<div class="post"><p><a href="/post/' + k._id + '">' + k.name + '</a></p></div><hr />';
-        });
 
-        res.render('tagged', { content: text })
+    Post.find({ tags: { $in: searchTags } }, function(err, posts) {
+      posts.forEach(function(k, v) {
+        text += '<div class="post"><p><a href="/post/' + k._id + '">' + k.name + '</a></p></div><hr />';
+      });
+      res.render('tagged', { content: text })
     });
 });
 
