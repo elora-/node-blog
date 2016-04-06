@@ -29,6 +29,7 @@ app.use('/', routes);
 app.use('/post', post);
 app.use('/new', newPost);
 app.use('/tags', tags);
+app.use('/tagged', tags);
 
 mongoose.connect('mongodb://localhost/blogdb');
 

@@ -31,4 +31,15 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.get('/tagged', function(req, res, next) {
+    var text = '';
+    Post.find({ tags: { $in: [ req.query.search ] } }, function(err, posts) {
+        posts.forEach(function(k, v) {
+            text += '<div class="post"><p><a href="/post/' + k._id + '">' + k.name + '</a></p></div><hr />';
+        });
+
+        res.render('tagged', { content: text })
+    });
+});
+
 module.exports = router;
