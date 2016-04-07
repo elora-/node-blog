@@ -5,11 +5,40 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
 
 var routes = require('./controllers/index');
 var post = require('./controllers/post');
 var newPost = require('./controllers/new-post');
 var tags = require('./controllers/tags');
+var login = require('./controllers/login');
+var signup = require('./controllers/signup');
+
+passport.use(new LocalStrategy(function(username, password, done) {
+  User.findOne({ username: username }, function(err, user) {
+    if(err) { return done(err); }
+    if(!user) { return done(null, false); }
+    if(user.password != password) { return done(null, false); }
+    return done(null, user);
+  });
+}));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+mongoose.connect('mongodb://localhost/blogdb');
+
+var Post = require('./models/post');
+var User = require('./models/user');
 
 var app = express();
 
@@ -24,16 +53,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session( { resave: false, saveUninitialized: false, secret: 'blog' } ));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/post', post);
 app.use('/new', newPost);
 app.use('/tags', tags);
 app.use('/tagged', tags);
-
-mongoose.connect('mongodb://localhost/blogdb');
-
-var Post = require('./models/post');
+app.use('/login', login);
+app.use('/signup', signup);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

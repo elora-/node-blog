@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/tagged', function(req, res, next) {
-    var searchTags = req.query.search.replace(/\s/g, '').split(",");
+    var searchTags = req.query.search.toLowerCase().replace(/\s/g, '').split(",");
     var text = '';
 
     Post.find({ tags: { $in: searchTags } }, function(err, posts) {
