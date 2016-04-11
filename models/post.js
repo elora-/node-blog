@@ -13,7 +13,8 @@ var postSchema = new Schema({
   content: String,
   tags: Array,
   created_at: Date,
-  updated_at: Date
+  updated_at: Date,
+  by: String
 });
 
 postSchema.pre('save', function(next) {

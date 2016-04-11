@@ -1,18 +1,20 @@
 extends layout
 
 block content
-    div(class='container')
-        div(class='row header')
-            div(class='col-md-9')
-                form(method='get' action='/tags/tagged')
-                    div(class='form-group col-md-1')
-                        button(type='submit', class='btn btn-default') Search
-                    div(class='form-group col-md-11')
-                        input(type="search", id='search', name="search", placeholder='tag1, tag2, tag3' class='form-control')
-                h1 Tags
-                ul
-                    !{content}
-            div(class='col-md-3 sidebar')
-                a(class='btn btn-default btn-lg btn-block', href='/', role='button') Home
-                a(class='btn btn-default btn-lg btn-block', href='/new', role='button') New Post
-                a(class='btn btn-primary btn-lg btn-block', href='/tags', role='button') Tags
+  div(class='container')
+    div(class='row header')
+      div(class='col-md-9')
+        form(method='get' action='/tags/tagged')
+          div(class='form-group col-md-1')
+            button(type='submit', class='btn btn-default') Search
+          div(class='form-group col-md-11')
+            input(type="search", id='search', name="search", placeholder='tag1, tag2, tag3' class='form-control')
+        h1 Tags
+        ul
+          !{content}
+      div(class='col-md-3 sidebar')
+        a(class='btn btn-default btn-lg btn-block', href='/', role='button') Home
+        a(class='btn btn-default btn-lg btn-block', href='/new', role='button') New Post
+        a(class='btn btn-primary btn-lg btn-block', href='/tags', role='button') Tags
+    div(class='footer')
+      !{footerText}  

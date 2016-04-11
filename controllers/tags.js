@@ -6,7 +6,11 @@ var Post = require('./../models/post');
 router.get('/', function(req, res, next) {
     var allTags = [];
     var uniqueTags = [];
-    var number = 0;
+
+    var footerText = '<p><a href="/login">Log In</a><hr /><a href="/signup">Sign Up</a></p>';
+    if(req.user) {
+      footerText = '<p>Logged in as: ' + req.user.username + '</p>';
+    }
 
     Post.find({}, function(err, posts) {
         posts.forEach(function(k, v){
@@ -21,25 +25,23 @@ router.get('/', function(req, res, next) {
           }
         });
 
-        function compare(a, b) {
-            if(typeof a == 'number' && typeof b == 'number') {
-                return a - b;
-            }
-        }
-
-        res.render('tags', { content: '<li>' + uniqueTags.sort(compare).join('</li><li>') + '</li>', title: 'Tags' });
+        res.render('tags', { content: '<li>' + uniqueTags.sort().join('</li><li>') + '</li>', title: 'Tags', footerText: footerText });
     });
 });
 
 router.get('/tagged', function(req, res, next) {
     var searchTags = req.query.search.toLowerCase().replace(/\s/g, '').split(",");
     var text = '';
+    var footerText = '<p><a href="/login">Log In</a><hr /><a href="/signup">Sign Up</a></p>';
+    if(req.user) {
+      footerText = '<p>Logged in as: ' + req.user.username + '</p>';
+    }
 
     Post.find({ tags: { $in: searchTags } }, function(err, posts) {
       posts.forEach(function(k, v) {
         text += '<div class="post"><p><a href="/post/' + k._id + '">' + k.name + '</a></p></div><hr />';
       });
-      res.render('tagged', { content: text })
+      res.render('tagged', { content: text, footerText: footerText })
     });
 });
 

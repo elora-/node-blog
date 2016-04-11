@@ -10,15 +10,18 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     username: String,
-    password: String
-}, {collection: 'users'});
+    password: String,
+    admin: Boolean
+});
 
 userSchema.pre('save', function(next, done) {
-    if(User.findOne({ username: this.username }) == null) {
-        next();
+  User.findOne({ username: this.username }, function(err, user) {
+    if(user == null) {
+      next();
     } else {
-        done();
+      done(null, false);
     }
+  });
 });
 
 var User = mongoose.model('User', userSchema);
