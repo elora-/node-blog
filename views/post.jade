@@ -4,26 +4,35 @@ block content
   div(class='container')
     div(class='row header')
       div(class='col-md-9')
-        h1 #{name} <br />
-          small By: #{by} <br />
-          small Created at: #{created_at} <br />
-          small Updated at: #{updated_at} <br />
-          small Tags: #{tags}
-        p #{content}
+        h1 #{post.name} <br />
+          small By: #{post.by} <br />
+          small Created at: #{post.created_at} <br />
+          small Updated at: #{post.updated_at} <br />
+          small Tags: #{post.tags}
+        p #{post.content}
       div(class='col-md-3 sidebar pull-right')
         a(class='btn btn-default btn-lg btn-block', href='/', role='button') Home
         a(class='btn btn-default btn-lg btn-block', href='/new', role='button') New Post
         a(class='btn btn-default btn-lg btn-block', href='/tags', role='button') Tags
         hr
-        a(class='btn btn-default btn-lg btn-block', href='/post/#{id}/update', role='button') Update Post
-        a(class='btn btn-danger btn-lg btn-block', id='delete', href='/post/#{id}/delete', role='button') Delete Post
-    div(class='footer roww')
-      !{footerText}
+        a(class='btn btn-default btn-lg btn-block', href='/post/#{post.id}/update', role='button') Update Post
+        a(class='btn btn-danger btn-lg btn-block', id='delete', href='/post/#{post.id}/delete', role='button') Delete Post
+    div(class='footer row')
+      if currentUser
+        div(class='col-md-11')
+          p Logged in as: #{currentUser.username}
+        div(class='col-md-1')
+          p: a(href='/logout') Log Out
+      else
+        div(class='col-md-11')
+          p: a(href='/login') Log In
+        div(class='col-md-1')
+          p: a(href='/signup') Sign Up
   script.
     $('#delete').click(function(e) {
       e.preventDefault();
       
       if(confirm("Are you sure?")) {
-        window.location = '/post/#{id}/delete'
+        window.location = '/post/#{post.id}/delete'
       }
     });

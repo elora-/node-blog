@@ -27,7 +27,16 @@ block content
           hr
           a(class='btn btn-primary btn-lg btn-block', href='#', role='button') #{title}
     div(class='footer row')
-      !{footerText}
+      if currentUser
+        div(class='col-md-11')
+          p Logged in as: #{currentUser.username}
+        div(class='col-md-1')
+          p: a(href='/logout') Log Out
+      else
+        div(class='col-md-11')
+          p: a(href='/login') Log In
+        div(class='col-md-1')
+          p: a(href='/signup') Sign Up
     script.
       document.getElementById("content").value = '#{content}'
       

@@ -7,15 +7,9 @@ var User = require('./../models/user');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   User.find({}, function(err, users) {
-    var text = "";
-    var footerText = '<p><a href="/login">Log In</a><hr /><a href="/signup">Sign Up</a></p>';
-    if(req.user) {
-      footerText = '<p>Logged in as: ' + req.user.username + '</p>';
-    }
-    users.forEach(function(k, v){
-      text += '<tr><td>' + k.username + '</td><td>' + k.password + '</td><td>' + k.admin + '</td></tr>';
-    });
-    res.render('users', { content: text, footerText: footerText });
+    res.render('users', {
+      currentUser: req.user,
+      users: users });
   });
 });
 

@@ -11,10 +11,20 @@ block content
             input(type="search", id='search', name="search", placeholder='tag1, tag2, tag3' class='form-control')
           h1 #{title}
           ul
-            !{content}
+            each tag in tags
+              li= tag
       div(class='col-md-3 sidebar')
         a(class='btn btn-default btn-lg btn-block', href='/', role='button') Home
         a(class='btn btn-default btn-lg btn-block', href='/new', role='button') New Post
         a(class='btn btn-primary btn-lg btn-block', href='/tags', role='button') Tags
     div(class='footer row')
-      !{footerText}
+      if currentUser
+        div(class='col-md-11')
+          p Logged in as: #{currentUser.username}
+        div(class='col-md-1')
+          p: a(href='/logout') Log Out
+      else
+        div(class='col-md-11')
+          p: a(href='/login') Log In
+        div(class='col-md-1')
+          p: a(href='/signup') Sign Up

@@ -8,6 +8,20 @@ block content
           th Username
           th Password
           th Admin
-      !{content}
-    !{footerText}
-          
+      tbody
+        each user in users
+          tr
+            td= user.username
+            td= user.password
+            td= user.admin
+    div(class='footer row')
+      if currentUser
+        div(class='col-md-11')
+          p Logged in as: #{currentUser.username}
+        div(class='col-md-1')
+          p: a(href='/logout') Log Out
+      else
+        div(class='col-md-11')
+          p: a(href='/login') Login In
+        div(class='col-md-1')
+          p: a(href='/signup') Sign Up
