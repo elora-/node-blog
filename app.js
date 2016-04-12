@@ -16,6 +16,7 @@ var tags = require('./controllers/tags');
 var login = require('./controllers/login');
 var signup = require('./controllers/signup');
 var users = require('./controllers/users');
+var logout = require('./controllers/logout');
 
 passport.use(new LocalStrategy(function(username, password, done) {
   User.findOne({ username: username }, function(err, user) {
@@ -62,10 +63,10 @@ app.use('/', routes);
 app.use('/post', post);
 app.use('/new', newPost);
 app.use('/tags', tags);
-app.use('/tagged', tags);
 app.use('/login', login);
 app.use('/signup', signup);
 app.use('/users', users);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

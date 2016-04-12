@@ -4,9 +4,9 @@ var Post = require('./../models/post');
 
 /* GET post */
 router.get('/', function(req, res, next) {
-  var footerText = '<p><a href="/login">Log In</a><hr /><a href="/signup">Sign Up</a></p>';
+  var footerText = '<div class="col-md-11"><p><a href="/login">Log In</a></div><div class="col-md-1"><a href="/signup">Sign Up</a></p></div>';
   if(req.user) {
-    footerText = '<p>Logged in as: ' + req.user.username + '</p>';
+    footerText = '<div class="col-md-11"><p>Logged in as: ' + req.user.username + '</p></div><div class="col-md-1"><a href="/logout">Logout</a></p></div>';
   }
   res.render('form', { title: "New Post", name: '', tags: '', footerText: footerText });
 });
