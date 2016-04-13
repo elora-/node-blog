@@ -1,24 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var passport = require('passport');
-var User = require('./../models/user');
+var signup = require('../helpers/signup');
 
-router.get('/', function(req, res, next) {
-    res.render('login', { title: 'Sign Up' });
-});
+router.get('/', signup.renderSignup);
 
-router.post('/', function(req, res, next) {
-    var newUser = new User({
-        username: req.body.username,
-        password: req.body.password,
-        admin: false
-    });
-
-    newUser.save(function(err) {
-        if(err) throw err;
-    });
-
-    res.redirect('/');
-});
+router.post('/', signup.saveUser);
 
 module.exports = router;

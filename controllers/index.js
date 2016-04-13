@@ -1,16 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-var Post = require('./../models/post');
-var User = require('./../models/user');
+var index = require('../helpers/index');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  Post.find({}, function(err, posts) {
-    res.render('index', {
-      currentUser: req.user,
-      posts: posts});
-  });
-});
+router.get('/', index.getPosts, index.renderPosts);
 
 module.exports = router;
