@@ -8,12 +8,14 @@ block content
           th Username
           th Password
           th Admin
+          th
       tbody
         each user in users
           tr
             td= user.username
             td= user.password
             td= user.admin
+            td: a(href='/users/#{user.id}/admin') Edit
     div(class='footer row')
       if currentUser
         div(class='col-md-11')
@@ -22,6 +24,6 @@ block content
           p: a(href='/logout') Log Out
       else
         div(class='col-md-11')
-          p: a(href='/login') Login In
+          p: a(href='/login') Log In
         div(class='col-md-1')
           p: a(href='/signup') Sign Up

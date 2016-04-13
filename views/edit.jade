@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1 Edit User
+        form(method="post")
+            div(class='form-group')
+            if updateUser.admin
+                p Admin
+                input(type='checkbox', name='admin', checked='checked', value=true, class='form-control')
+            else
+                p Admin
+                input(type='checkbox', name='admin', value='true', class='form-control')
+            button(type='submit', class='btn btn-primary') Submit

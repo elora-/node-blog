@@ -10,3 +10,17 @@ module.exports.login = passport.authenticate('local',
     successRedirect: '/',
     failureRedirect: '/login'
 });
+
+module.exports.isLoggedIn = function(req, res, next) {
+    if(req.user)
+        next();
+    else
+        res.redirect('/login');
+};
+
+module.exports.isAdmin = function(req, res, next) {
+    if(req.user.admin)
+        next();
+    else
+        res.redirect('/');
+};
