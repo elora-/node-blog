@@ -24,3 +24,10 @@ module.exports.isAdmin = function(req, res, next) {
     else
         res.redirect('/');
 };
+
+module.exports.isAuthor = function(req, res, next) {
+    if(req.user.username == req.post.by)
+        next();
+    else
+        res.redirect('/');
+};

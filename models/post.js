@@ -11,6 +11,10 @@ var postSchema = new Schema({
   by: String
 });
 
+postSchema.statics.updatePost = function(id, title, content, tags, cb) {
+  this.update({_id: id}, {$set: { name: title, content: content, tags: tags }}, cb);
+};
+
 postSchema.pre('save', function(next) {
   var currentDate = new Date();
 

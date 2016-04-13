@@ -35,11 +35,9 @@ module.exports.renderEdit = function(req, res, next) {
 };
 
 module.exports.saveEdit = function(req, res, next) {
-    if(req.user.admin) {
-        User.updateAdmin(req.updateUser._id, req.body.admin, function() {
-            next();
-        });
-    }
+    User.updateAdmin(req.updateUser._id, req.body.admin, function() {
+        next();
+    });
 
     next();
 };

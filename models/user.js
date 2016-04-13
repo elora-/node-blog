@@ -9,7 +9,7 @@ var userSchema = new Schema({
 });
 
 userSchema.statics.updateAdmin = function(_id, admin, cb) {
-    User.update({_id: _id}, {$set: {admin: admin}}, cb);
+    this.update({_id: _id}, {$set: {admin: admin}}, cb);
 };
 
 userSchema.pre('save', function(next, done) {
