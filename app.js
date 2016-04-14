@@ -37,12 +37,15 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-mongoose.connect('mongodb://localhost/blogdb');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 var Post = require('./models/post');
 var User = require('./models/user');
 
 var app = express();
+
+var port = process.env.PORT || 3000;
+
 
 // view engine setup
 app.set('port', (process.env.PORT || 5000));
@@ -68,6 +71,10 @@ app.use('/login', login);
 app.use('/signup', signup);
 app.use('/users', users);
 app.use('/logout', logout);
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
 
 
 // catch 404 and forward to error handler
